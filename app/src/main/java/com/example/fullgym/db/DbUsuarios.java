@@ -18,9 +18,11 @@ public class DbUsuarios extends DbHelper{
         this.context = context;
     }
 
-
-
-    public void insertarUsuario(String id, String nombre, String apellido, String telefono, String password) {
+    public void insertarUsuario(String id,
+                                String nombre,
+                                String apellido,
+                                String telefono,
+                                String password) {
         try{
         DbHelper admin = new DbHelper(context);
         SQLiteDatabase db = admin.getWritableDatabase();

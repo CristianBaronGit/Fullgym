@@ -40,14 +40,35 @@ public class IngresoUsuario extends AppCompatActivity {
         btningresaruser=findViewById(R.id.btningresoingreso);
         btningresaruser.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                try{
+                String id = userlogin.getText().toString();
+                String password = passwordlogin.getText().toString();
 
+
+                try{
                 Cursor cursor=dbUsuarios.ConsultarUsuPas(userlogin.getText().toString(),passwordlogin.getText().toString());
-                    if(cursor.getCount()>0){
-                        Intent i= new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(i);
+                if(id.isEmpty()){
+                    userlogin.setError("Por favor digite su Usuario");
+                }
+                if(password.isEmpty()) {
+                    passwordlogin.setError("Por favor digite su Contraseña");
+                }
+
+                if(cursor.getCount()>0){
+                        //Cursor fila=dbUsuarios.TraerNombreUsu(userlogin.getText().toString());
+                        if(cursor.moveToFirst()){
+                            Intent miIntent=null;
+                            switch (view.getId()){
+                                case R.id.btningresoingreso:
+                                    miIntent=new Intent( getApplicationContext(), MainActivity.class);
+                                    miIntent.putExtra("id",userlogin.getText().toString());
+                                    break;
+                            }
+                            if(miIntent!=null){
+                                startActivity(miIntent);
+                            }
+                        }
                     }else{
-                        Toast.makeText(getApplicationContext(),"Usuario o COntraseña incorrectos",
+                        Toast.makeText(getApplicationContext(),"Usuario o Contraseña incorrectos",
                             Toast.LENGTH_LONG).show();
                     }
                     userlogin.setText("");

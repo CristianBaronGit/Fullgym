@@ -8,6 +8,7 @@
     tools:context=".IngresoUsuario">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="312dp"
         android:layout_height="611dp"
         android:orientation="vertical"
@@ -72,4 +73,16 @@
             android:text="Registrarse"
             app:cornerRadius="20dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tviduseringreso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
 </androidx.constraintlayout.widget.ConstraintLayout>

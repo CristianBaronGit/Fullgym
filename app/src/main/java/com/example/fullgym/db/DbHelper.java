@@ -8,12 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION=1;
     private static final String DATABASE_NOMBRE="gimnasio.db";
     public static final String TABLE_USUARIOS ="t_usuarios";
-
+    public static final String TABLE_DIETAS ="t_dietas";
 
     public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NOMBRE, null, DATABASE_VERSION);
@@ -29,6 +33,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 "telefono INT NOT NULL," +
                 "password TEXT NOT NULL)");
 
+        sqLiteDatabase.execSQL("create table " + TABLE_DIETAS + "(" +
+                "id_dieta int primary key autoincrement," +
+                " id_user int," +
+                " fecha String," +
+                " desayuno String," +
+                " brunch String," +
+                " lunch String," +
+                " onces String," +
+                " cena String )");
+
     }
 
     @Override
@@ -42,6 +56,12 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor mcursor=null;
         mcursor=this.getReadableDatabase().query("t_usuarios", new String[]{"id","nombre","apellido","telefono","password"},"id like '"+id+"' and password like '"+password+"'",null,null,null,null);
         return mcursor;
+    }
+
+    public Cursor TraerNombreUsu(String id) throws  SQLException{
+        Cursor traercursor=null;
+        traercursor=this.getReadableDatabase().query("t_usuarios", new String[]{"id","nombre","apellido","telefono","password"},"id like '"+id+"'",null,null,null,null);
+        return traercursor;
     }
 
 
